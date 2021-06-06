@@ -3,6 +3,8 @@
 #include "PreferencesDialog.h"
 #include "Properties.h"
 
+#include <QActionGroup>
+
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     setWindowTitle(tr("File Manager"));
@@ -293,7 +295,9 @@ void MainWindow::createActionsAndMenus()
     hiddenAction->setCheckable(true);
     connect(hiddenAction, SIGNAL(triggered()), this, SLOT(toggleHidden()));
 
-
+    viewActionGroup = new QActionGroup(this);
+    viewActionGroup->addAction(detailViewAction);
+    viewActionGroup->addAction(iconViewAction);
 
     aboutAction = new QAction(QIcon::fromTheme("help-about", QIcon(":/Images/About.ico")), tr("&О программе"), this );
     aboutAction->setStatusTip(tr("О программе"));
@@ -400,7 +404,6 @@ void MainWindow::showAboutBox()
 {
     QMessageBox::about(this, tr("О программе"),
                        tr("<h2>File Manager</h2>"
-                          "<p><em>Версия 0.3</em><br>"
                           "группа 053502 БГУИР ФКСиС ИиТП<br>"
                           "2021 Володьков Савелий<br>"));
 }

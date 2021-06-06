@@ -5,6 +5,7 @@
 #include <QAbstractItemView>
 #include <QLabel>
 #include <QDateTime>
+#include <QFileInfo>
 #include "Pane.h"
 #include "Properties.h"
 #include "MainWindow.h"
@@ -16,7 +17,7 @@ Properties::Properties(QWidget *parent) : QDialog(parent)
 
     QVBoxLayout* layout = new QVBoxLayout(this);
     QFormLayout* formLayout = new QFormLayout();
-    formLayout->setContentsMargins(5,5,5,5);
+    formLayout->setSpacing(5);
 
     MainWindow* mainWindow(static_cast<MainWindow*>(parent));
     QWidget* focus(mainWindow->focusWidget());
@@ -30,7 +31,7 @@ Properties::Properties(QWidget *parent) : QDialog(parent)
         formLayout->addRow(tr("Путь:"), pLabel);
         QLabel* sLabel = new QLabel(QString::number(fileInfo.size()) + " byte");
         formLayout->addRow(tr("Размер:"), sLabel);
-        QLabel* cLabel = new QLabel(fileInfo.fileName());
+        QLabel* cLabel = new QLabel(fileInfo.birthTime().toString());
         formLayout->addRow(tr("Создан:"), cLabel);
         QLabel* mLabel = new QLabel(fileInfo.lastModified().toString());
         formLayout->addRow(tr("Последнее изменение:"), mLabel);
