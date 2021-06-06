@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     setUnifiedTitleAndToolBarOnMac(true);
     createActionsAndMenus();
 
-    settings = new QSettings("Dima Melkunas", "File Manager");
+    settings = new QSettings("Savely Volodkov", "File Manager");
     splitter = new QSplitter(this);
 
     fileSystemModel = new QFileSystemModel;
@@ -22,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     fileSystemProxyModel = new FileSystemModelFilterProxyModel();
     fileSystemProxyModel->setSourceModel(fileSystemModel);
     fileSystemProxyModel->setSortCaseSensitivity(Qt::CaseInsensitive);
-    //fileSystemProxyModel->sort(0);//////////////////////////////////////
 
     directoryTreeView = new QTreeView(splitter);
     directoryTreeView->setModel(fileSystemProxyModel);
